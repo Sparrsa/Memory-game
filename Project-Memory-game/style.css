@@ -1,0 +1,89 @@
+*{
+    margin: 0;
+    padding: 0;
+    box-sizing: border-box;
+}
+body{
+    height: 100vh;
+    position: relative;
+    /* width: 50%; */
+}
+
+
+
+.game{
+    width: 70%;
+    margin: 0 auto;
+    
+}
+
+
+
+
+.deck-container{
+    display: flex;
+    flex-wrap: wrap;
+   
+    perspective: 1000px;
+    
+}
+h1{
+    text-align: center;
+}
+
+
+
+.card-img{
+    border: 1px solid black;
+    cursor: pointer;
+    width: 100px;
+    margin: .2em;
+    transform: scale(1);
+    position: absolute;
+    transform-style: preserve-3d;
+    transform: rotateY(180deg);
+    /* transition: transform 1s ease; */
+    transition: all 2s cubic-bezier(0.175, 0.885, 0.32, 1.275);
+    box-shadow: rgba(0, 0, 0, 0.2) 0px 5px 20px;
+    
+}
+
+.card-back{
+    width: 100px;
+    
+    backface-visibility: hidden;
+}
+
+.card-img:active{
+    transform: scale(.95);
+   
+    
+}
+
+/* @keyframes show {
+    0% {
+        background-color: darkblue;
+        color: transparent;
+    }
+
+    100% {
+        background-color: white;
+        color: black;
+    }
+}
+
+.hide {
+    animation: hide 2s forwards;
+}
+
+@keyframes hide {
+    0% {
+        background-color: white;
+        color: black;
+    }
+
+    100% {
+        background-color: darkblue;
+        color: transparent;
+    }
+} */
