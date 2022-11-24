@@ -31,8 +31,8 @@ body{
 }
 
 .card-container{
-   width: calc(25% - 10px);
-   height: 33%;
+   width: 23.5%;
+   height: 35%;
    position: relative;
    transform: scale(1);
    transform-style: preserve-3d;
