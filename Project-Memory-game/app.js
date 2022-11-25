@@ -124,7 +124,7 @@ let cardLock = false;
 // Card flip
 function flipCard() {
   if (cardLock) return; //Avslutar funktionen och "låser" då möjligheten att flippa fler kort om man redan valt 2st kort
-  if (this === firstCard) return; //Åtgärdar en bugg ifall man klickar för snabbt. "this" = det man har klickat på
+  if (this === firstCard) return;
 
   this.classList.add("flip"); //Genererar en ny "flip" class till htmlen i card-container varje gång man trycker på ett kort. "this" = det man har klickat på
 
