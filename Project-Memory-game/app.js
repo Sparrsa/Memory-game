@@ -79,8 +79,6 @@ cardGenerator();
 //Väljer ut alla kort. Måste ligga här eftersom allt tidigare är att skapa korten
 const cards = document.querySelectorAll(".card-container");
 
-//if-else statements
-
 //Score keeper.
 // btnStart.addEventListener("click", function () {
 //   score = score + 1;
@@ -99,7 +97,6 @@ let playerTwo = {
   score: 0,
 };
 
-//////////////////////////////////////////////
 let players = [playerOne, playerTwo];
 let gameTurn = 0;
 
@@ -126,22 +123,27 @@ let cardLock = false;
 
 // Card flip
 function flipCard() {
-  //////////////////////////////////////
-  if (cardLock) return; //Låser möjligheten att flippa fler kort om man redan valt 2st kort
-  if (this === firstCard) return; //Åtgärdar en bugg ifall man klickar för snabbt
-  //Genererar en ny "flip" class till htmlen i card-container varje gång man trycker på ett kort
-  this.classList.add("flip");
+  if (cardLock) return; //Avslutar funktionen och "låser" då möjligheten att flippa fler kort om man redan valt 2st kort
+  if (this === firstCard) return; //Åtgärdar en bugg ifall man klickar för snabbt. "this" = det man har klickat på
+
+  this.classList.add("flip"); //Genererar en ny "flip" class till htmlen i card-container varje gång man trycker på ett kort. "this" = det man har klickat på
 
   if (!hasFlippedCard) {
-    //First card. "Om ett kort inte har vänts och sedan vänds så blir den true"
+    console.log(!hasFlippedCard);
+    //First card. "Om ett kort inte har vänts så är den false, och sedan om den vänds så blir den true"
     //bredvid .card-container får man ett till class namn som heter ".flip"
     hasFlippedCard = true;
     firstCard = this;
+    console.log(hasFlippedCard, this);
+
+    // Går vidare till else statement eftersom hasFlippedCard är true efter man vänt på ett kort
   } else {
     //second card
     hasFlippedCard = false;
     secondCard = this;
+    console.log(hasFlippedCard);
 
+    console.log(firstCard, secondCard);
     matchedCards(); //skickar vidare till matchedCards funktionen
   }
 }
@@ -150,8 +152,10 @@ function matchedCards() {
   //Om kort ett och två matchar och har samma "data.name" så kommer addEventListener sluta gälla
   //för dem korten. Alltså de kommer inte vändas tillbaka.
   if (firstCard.dataset.name === secondCard.dataset.name) {
+    console.log(firstCard);
     firstCard.removeEventListener("click", flipCard);
     secondCard.removeEventListener("click", flipCard);
+    fadeAwayCards();
   } else {
     cardLock = true; // "true" = Alla andra kort förutom dem två valda korten blir "låsta"
     // Om korten INTE stämmer med varandra så kommer "flipCard" funktionen sluta gälla
@@ -163,6 +167,13 @@ function matchedCards() {
     }, 2000); //2s timer
   }
 }
+
+// function fadeAwayCards() {
+//   // Kanske går att sätta någon media@ så korten fadear ut?
+//   firstCard.style.cssText = `visibility: hidden;
+//   transition: ease-out;`; // Gömmer rätt valda kort
+//   secondCard.style.visibility = "hidden"; // Gömmer rätt valda kort
+// }
 
 function resetCards() {
   //tar bort "låsningen" om
