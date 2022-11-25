@@ -1,8 +1,14 @@
 //Declaring our variables.
 const deckContainer = document.querySelector(".deck-container");
-
+let playerPara = document.createElement("p");
+// playerPara.classList.add("player-score"); // Skapa player score i js?
+// playerPara.innerText = "Player 1 score: ";
 let btnStart = document.querySelector(".btn-start");
-let score = document.querySelector("span");
+let score = document.querySelector(".player-score");
+
+// let playerLives = 6;
+
+// playerLives.textContent = playerLives;
 
 //Generating alla bilder
 const getData = () => [
@@ -79,38 +85,36 @@ cardGenerator();
 //Väljer ut alla kort. Måste ligga här eftersom allt tidigare är att skapa korten
 const cards = document.querySelectorAll(".card-container");
 
-//Score keeper.
-// btnStart.addEventListener("click", function () {
-//   score = score + 1;
-//   return score;
-// });
-
 let playerOne = {
   //Spelare 1
-  name: " ",
+  name: "player 1",
   score: 0,
 };
 
 let playerTwo = {
   //Spelare 2
-  name: " ",
+  name: "player 2",
   score: 0,
 };
 
 let players = [playerOne, playerTwo];
-let gameTurn = 0;
+let playerTurn = 0;
 
 const playerTurnLbl = document.querySelector(".player-turn-lbl");
 
-function updateDisplay() {
-  let currentPlayer = players[gameTurn];
+function startGame() {
+  playerTurn = 0; // 0 = player 1 turn, 1 = player 2 turn
+
+  let currentPlayer = players[playerTurn];
   playerTurnLbl.innerText = currentPlayer.name;
+
+  updateDisplay();
 }
 
-function startGame() {
-  gameTurn = 0;
+startGame();
 
-  let currentPlayer = players[gameTurn];
+function updateDisplay() {
+  let currentPlayer = players[playerTurn];
   playerTurnLbl.innerText = currentPlayer.name;
 }
 
@@ -155,7 +159,8 @@ function matchedCards() {
     console.log(firstCard);
     firstCard.removeEventListener("click", flipCard);
     secondCard.removeEventListener("click", flipCard);
-    fadeAwayCards();
+    // fadeAwayCards();
+    newScore();
   } else {
     cardLock = true; // "true" = Alla andra kort förutom dem två valda korten blir "låsta"
     // Om korten INTE stämmer med varandra så kommer "flipCard" funktionen sluta gälla
@@ -163,8 +168,34 @@ function matchedCards() {
     setTimeout(() => {
       firstCard.classList.remove("flip");
       secondCard.classList.remove("flip");
+
+      playerTurn = (playerTurn + 1) % 2;
+
+      updateDisplay();
       resetCards();
-    }, 2000); //2s timer
+    }, 1000); //1s timer
+  }
+}
+
+// const playerStats = document.querySelector(".stats");
+
+// playerStats.append(playerPara);
+
+let playerOneScoreLbl = document.querySelector(".player-one-score");
+let playerTwoScoreLbl = document.querySelector(".player-two-score");
+
+function newScore() {
+  //Lägger till score till player 1 och 2. Work in progress!!
+  if ((playerTurn = 0)) {
+    let pOneAddScore = (playerOne.score = score + 1);
+    playerOneScoreLbl = pOneAddScore;
+    console.log(playerOne.score);
+  } else if ((playerTurn = 1)) {
+    let pTwoAddScore = (playerTwo.score = score + 1);
+    playerTwoScoreLbl = pTwoAddScore;
+    console.log(playerTwo.score);
+  } else {
+    console.log("no score");
   }
 }
 
@@ -185,9 +216,14 @@ function resetCards() {
 //Lägger till en event listener på alla kort som lyssnar efter funktionen flipCard
 cards.forEach((card) => card.addEventListener("click", flipCard));
 
-//Reset the game.
-function reset() {
-  //Reset all the functions.
+//resetting the game through the btnStart
 
-  return;
-}
+// btnStart.addEventListener("click", function{
+//  resetGame();
+// });
+
+// function resetGame() {
+//   //Om alla kort är vända uppåt, så ska allt resettas
+//   if()
+
+// }

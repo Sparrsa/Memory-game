@@ -10,10 +10,16 @@
   </head>
   <body>
     <h1>Memory Game</h1>
-    <span>Score: </span>
-    <h3><label class="player-turn-lbl">namn_på_spelare</label>'s turn</h3>
+
     <main class="game">
-      <button class="btn-start">Start Game</button>
+      <div class="stats">
+        <h3 class="player-turn-display">
+          <label class="player-turn-lbl">namn_på_spelare</label>'s turn
+        </h3>
+        <p class="player-one-score">Player 1 score:</p>
+        <p class="player-two-score">Player 2 score:</p>
+      </div>
+      <button class="btn-start">Restart</button>
 
       <section class="deck-container"></section>
     </main>

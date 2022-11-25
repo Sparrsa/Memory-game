@@ -6,7 +6,10 @@
 body{
     height: 100vh;
     position: relative;
-    /* width: 50%; */
+     background: #ADA996;  
+    background: -webkit-linear-gradient(to right, #EAEAEA, #DBDBDB, #F2F2F2, #ADA996);  
+    background: linear-gradient(to right, #EAEAEA, #DBDBDB, #F2F2F2, #ADA996); 
+    ;
 }
 
 
@@ -21,17 +24,18 @@ body{
 
 
 .deck-container{
-    width: 800px;
+    width: 1200px; 
     height: 500px;
     margin: auto;
     display: flex;
     flex-wrap: wrap;
     perspective: 1000px;
+    
    
 }
 
 .card-container{
-   width: 23.5%;
+   width: 16%;
    height: 35%;
    position: relative;
    transform: scale(1);
@@ -41,6 +45,10 @@ body{
 
 h1{
     text-align: center;
+}
+
+.stats{
+    margin-left: 12%;
 }
 
 
@@ -54,9 +62,7 @@ h1{
     transform: scale(1);
     position: absolute;
     transform-style: preserve-3d;
-   
-    /* transition: all 2s cubic-bezier(0.175, 0.885, 0.32, 1.275); */
-    box-shadow: rgba(0, 0, 0, 0.2) 0px 5px 20px; 
+    box-shadow: rgba(136, 136, 136, 0.425) 0px .5em 1em; 
    
 }
 
@@ -76,4 +82,24 @@ h1{
 /* "flip" classen skapas i javascript */
 .card-container.flip {
     transform: rotateY(180deg);
+}
+
+.btn-start{
+    display: flex;
+    padding: 15px 15px;
+    border-radius: 2px;
+    margin: 0 auto;
+    font-size: bold;
+    cursor: pointer;
+    transform: scale(1);
+}
+.btn-start:active{
+    transform: scale(.95);
+   
+    transition: transform .2s;
+}
+.player-turn-lbl, h3{
+    display: flex;
+    /* flex-direction: flex-start; */
+    
 }
