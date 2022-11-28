@@ -6,9 +6,15 @@ let playerPara = document.createElement("p");
 let btnStart = document.querySelector(".btn-start");
 let score = document.querySelector(".player-score");
 
-// let playerLives = 6;
-
-// playerLives.textContent = playerLives;
+let audio = document.querySelector(".theme-song");
+audio.volume = 0.1;
+audio.loop = true;
+let flipAudio = document.querySelector(".card-flip");
+flipAudio.volume = 0.5;
+let correctAudio = document.querySelector(".audio-correct");
+correctAudio.volume = 0.1;
+let wrongAudio = document.querySelector(".audio-wrong");
+wrongAudio.volume = 0.05;
 
 //Generating alla bilder
 const getData = () => [
@@ -64,7 +70,7 @@ const cardGenerator = () => {
     let cardContainer = document.createElement("div"); // container till varje par
     // let cardFront = document.createElement("div"); // framsida på kort
     // let cardBack = document.createElement("div"); // baksida på kort
-    let frontImg = document.createElement("img"); //bild till både fram och baksida
+    let frontImg = document.createElement("img");
     let backImg = document.createElement("img");
 
     // ger classer
@@ -102,10 +108,12 @@ let playerTurn = 0;
 
 const playerTurnLbl = document.querySelector(".player-turn-lbl");
 
+let currentPlayer = players[playerTurn];
+
 function startGame() {
   playerTurn = 0; // 0 = player 1 turn, 1 = player 2 turn
 
-  let currentPlayer = players[playerTurn];
+  currentPlayer = players[playerTurn];
   playerTurnLbl.innerText = currentPlayer.name;
 
   updateDisplay();
@@ -150,6 +158,8 @@ function flipCard() {
     console.log(firstCard, secondCard);
     matchedCards(); //skickar vidare till matchedCards funktionen
   }
+
+  flipAudio.play();
 }
 
 function matchedCards() {
@@ -160,7 +170,8 @@ function matchedCards() {
     firstCard.removeEventListener("click", flipCard);
     secondCard.removeEventListener("click", flipCard);
     // fadeAwayCards();
-    newScore();
+    correctAudio.play();
+    scoreCounter();
   } else {
     cardLock = true; // "true" = Alla andra kort förutom dem två valda korten blir "låsta"
     // Om korten INTE stämmer med varandra så kommer "flipCard" funktionen sluta gälla
@@ -170,30 +181,28 @@ function matchedCards() {
       secondCard.classList.remove("flip");
 
       playerTurn = (playerTurn + 1) % 2;
-
+      wrongAudio.play();
       updateDisplay();
       resetCards();
     }, 1000); //1s timer
   }
 }
 
-// const playerStats = document.querySelector(".stats");
-
-// playerStats.append(playerPara);
-
 let playerOneScoreLbl = document.querySelector(".player-one-score");
 let playerTwoScoreLbl = document.querySelector(".player-two-score");
 
-function newScore() {
+function scoreCounter() {
   //Lägger till score till player 1 och 2. Work in progress!!
-  if ((playerTurn = 0)) {
-    let pOneAddScore = (playerOne.score = score + 1);
-    playerOneScoreLbl = pOneAddScore;
-    console.log(playerOne.score);
-  } else if ((playerTurn = 1)) {
-    let pTwoAddScore = (playerTwo.score = score + 1);
-    playerTwoScoreLbl = pTwoAddScore;
-    console.log(playerTwo.score);
+  if (playerTurn === 0) {
+    // Player 1 turn
+    players[playerTurn].score = players[playerTurn].score + 1;
+    playerOneScoreLbl.innerHTML = players[playerTurn].score;
+    console.log(players[playerTurn]); // Visar räknginen i konsollen
+  } else if (playerTurn === 1) {
+    // Player 2 turn
+    players[playerTurn].score = players[playerTurn].score + 1;
+    playerTwoScoreLbl.innerHTML = players[playerTurn].score;
+    console.log(players[playerTurn]); // Visar räknginen i konsollen
   } else {
     console.log("no score");
   }
@@ -218,12 +227,22 @@ cards.forEach((card) => card.addEventListener("click", flipCard));
 
 //resetting the game through the btnStart
 
-// btnStart.addEventListener("click", function{
-//  resetGame();
+// btnStart.addEventListener("click", function () {
+//   resetGame();
 // });
 
 // function resetGame() {
-//   //Om alla kort är vända uppåt, så ska allt resettas
-//   if()
+//Triggar igång en page refresher när man trycker på retart knappen.
+document.querySelector(".btn-start").addEventListener("click", function () {
+  window.location.reload();
+  return false;
+});
 
+// function cardFlipsSfx() {
+//   let flipAudio = document.querySelector(".card-flip");
+//   flipAudio.volume = 2;
 // }
+
+cards.addEventListener("click", function () {
+  cardFlipsSfx();
+});
