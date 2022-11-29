@@ -1,4 +1,5 @@
 //Declaring our variables.
+const mainContainer = document.querySelector("main");
 const deckContainer = document.querySelector(".deck-container");
 let playerPara = document.createElement("p");
 // playerPara.classList.add("player-score"); // Skapa player score i js?
@@ -6,8 +7,46 @@ let playerPara = document.createElement("p");
 let btnStart = document.querySelector(".btn-start");
 let score = document.querySelector(".player-score");
 
+//Skapar all musik och ljudeffekter
+///////////////////////////////////////////////
+
+//Theme song
+const audioTheme = document.createElement("audio");
+audioTheme.setAttribute("class", "theme-song");
+audioTheme.setAttribute("autoplay", "");
+audioTheme.setAttribute(
+  "src",
+  "./audio/Y2Mate.is - The Simpsons Main Title Theme-Fttst9dG6Ko-160k-1655507597330.mp3"
+);
+
+//flip sfx
+const flipSfx = document.createElement("audio");
+flipSfx.setAttribute("class", "card-flip");
+flipSfx.setAttribute("src", "./audio/240776__f4ngy__card-flip.wav");
+
+//correct sfx
+const correctSfx = document.createElement("audio");
+correctSfx.setAttribute("class", "audio-correct");
+correctSfx.setAttribute(
+  "src",
+  "./audio/Y2Mate.is - Check mark sound effect-AbiiZErJFC4-160k-1655212547023.mp3"
+);
+
+//wrong sfx
+const wrongSfx = document.createElement("audio");
+wrongSfx.setAttribute("class", "audio-wrong");
+wrongSfx.setAttribute(
+  "src",
+  "./audio/Y2Mate.is - Homer - D´OH-H22t-tiWiLw-128k-1659745984707.mp3"
+);
+
+//Lägger till allt i htmlen
+mainContainer.append(audioTheme, flipSfx, correctSfx, wrongSfx);
+
+///////////////////////////////////////////////////
+
 let audio = document.querySelector(".theme-song");
-audio.volume = 0.1;
+audio.volume = 0.05;
 audio.loop = true;
 let flipAudio = document.querySelector(".card-flip");
 flipAudio.volume = 0.5;
@@ -16,33 +55,37 @@ correctAudio.volume = 0.1;
 let wrongAudio = document.querySelector(".audio-wrong");
 wrongAudio.volume = 0.05;
 
+audio.play();
+
 //Generating alla bilder
-const getData = () => [
-  { imgSrc: "./img/img_Bart_1.png", name: "Bart Simpsons" },
-  { imgSrc: "./img/img_Bart_1.png", name: "Bart Simpsons" },
-  { imgSrc: "./img/img_family.png", name: "Family" },
-  { imgSrc: "./img/img_family.png", name: "Family" },
-  { imgSrc: "./img/img_Homer_2.png", name: "Homer" },
-  { imgSrc: "./img/img_Homer_2.png", name: "Homer" },
-  { imgSrc: "./img/img_Homer1.png", name: "Homer1" },
-  { imgSrc: "./img/img_Homer1.png", name: "Homer1" },
-  { imgSrc: "./img/img_Homer3.png", name: "Homer3" },
-  { imgSrc: "./img/img_Homer3.png", name: "Homer3" },
-  { imgSrc: "./img/Lisa.png", name: "Lisa" },
-  { imgSrc: "./img/Lisa.png", name: "Lisa" },
-  { imgSrc: "./img/maggie.png", name: "maggie" },
-  { imgSrc: "./img/maggie.png", name: "maggie" },
-  { imgSrc: "./img/NedFlanders.png", name: "Ned" },
-  { imgSrc: "./img/NedFlanders.png", name: "Ned" },
-  { imgSrc: "./img/Nirvana.png", name: "Nirvana" },
-  { imgSrc: "./img/Nirvana.png", name: "Nirvana" },
-  { imgSrc: "./img/reggae.png", name: "reggae" },
-  { imgSrc: "./img/reggae.png", name: "reggae" },
-  { imgSrc: "img/donut_family.png", name: "donut family" },
-  { imgSrc: "img/donut_family.png", name: "donut family" },
-  { imgSrc: "img/homer_donut.png", name: "homer donut" },
-  { imgSrc: "img/homer_donut.png", name: "homer donut" },
-];
+function getData() {
+  return [
+    { imgSrc: "./img/img_Bart_1.png", name: "Bart Simpsons" },
+    { imgSrc: "./img/img_Bart_1.png", name: "Bart Simpsons" },
+    { imgSrc: "./img/img_family.png", name: "Family" },
+    { imgSrc: "./img/img_family.png", name: "Family" },
+    { imgSrc: "./img/img_Homer_2.png", name: "Homer" },
+    { imgSrc: "./img/img_Homer_2.png", name: "Homer" },
+    { imgSrc: "./img/img_Homer1.png", name: "Homer1" },
+    { imgSrc: "./img/img_Homer1.png", name: "Homer1" },
+    { imgSrc: "./img/img_Homer3.png", name: "Homer3" },
+    { imgSrc: "./img/img_Homer3.png", name: "Homer3" },
+    { imgSrc: "./img/Lisa.png", name: "Lisa" },
+    { imgSrc: "./img/Lisa.png", name: "Lisa" },
+    { imgSrc: "./img/maggie.png", name: "maggie" },
+    { imgSrc: "./img/maggie.png", name: "maggie" },
+    { imgSrc: "./img/NedFlanders.png", name: "Ned" },
+    { imgSrc: "./img/NedFlanders.png", name: "Ned" },
+    { imgSrc: "./img/Nirvana.png", name: "Nirvana" },
+    { imgSrc: "./img/Nirvana.png", name: "Nirvana" },
+    { imgSrc: "./img/reggae.png", name: "reggae" },
+    { imgSrc: "./img/reggae.png", name: "reggae" },
+    { imgSrc: "img/donut_family.png", name: "donut family" },
+    { imgSrc: "img/donut_family.png", name: "donut family" },
+    { imgSrc: "img/homer_donut.png", name: "homer donut" },
+    { imgSrc: "img/homer_donut.png", name: "homer donut" },
+  ];
+}
 
 //Randomizing
 const randomize = () => {
@@ -226,23 +269,8 @@ function resetCards() {
 cards.forEach((card) => card.addEventListener("click", flipCard));
 
 //resetting the game through the btnStart
-
-// btnStart.addEventListener("click", function () {
-//   resetGame();
-// });
-
-// function resetGame() {
 //Triggar igång en page refresher när man trycker på retart knappen.
 document.querySelector(".btn-start").addEventListener("click", function () {
   window.location.reload();
   return false;
-});
-
-// function cardFlipsSfx() {
-//   let flipAudio = document.querySelector(".card-flip");
-//   flipAudio.volume = 2;
-// }
-
-cards.addEventListener("click", function () {
-  cardFlipsSfx();
 });
