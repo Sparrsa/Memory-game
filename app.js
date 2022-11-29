@@ -83,7 +83,6 @@ const cardGenerator = () => {
     deckContainer.append(cardContainer);
     cardContainer.append(frontImg, backImg);
   }
-  audio.play();
 };
 cardGenerator();
 
@@ -115,6 +114,7 @@ function startGame() {
   currentPlayer = players[playerTurn];
   playerTurnLbl.innerText = currentPlayer.name;
 
+  audio.play();
   updateDisplay();
 }
 
