@@ -70,8 +70,6 @@ const cardGenerator = () => {
   function createCard(imgSrc, name) {
     //skapar element
     let cardContainer = document.createElement("div"); // container till varje par
-    // let cardFront = document.createElement("div"); // framsida på kort
-    // let cardBack = document.createElement("div"); // baksida på kort
     let frontImg = document.createElement("img");
     let backImg = document.createElement("img");
 
