@@ -4,7 +4,7 @@
     box-sizing: border-box;
 }
 body{
-    height: 100vh;
+    
     position: relative;
      background: #ADA996;  
     background: -webkit-linear-gradient(to right, #EAEAEA, #DBDBDB, #F2F2F2, #ADA996);  
@@ -92,13 +92,26 @@ h1 {
     transform: rotateY(180deg);
 }
 
+.btn-music{
+    padding: 1.5em 2em;
+    border-radius: 2px;
+    font-size: bold;
+    cursor: pointer;
+    transform: scale(1);
+    margin-left: 3em;
+}
+
+.btn-music:active{
+    transform: scale(.95);
+    transition: transform .2s;
+}
+
 .btn-start{
-    display: flex;
-    padding: 20px 25px;
+    padding: 1.5em 2em;
     border-radius: 2px;
     /* margin: 0 auto; */
     /* margin: 17em 0 0 51.5em; */
-    margin: 15% 0 0 45%;
+    margin: 15% 0 0 40%;
     font-size: bold;
     cursor: pointer;
     transform: scale(1);
@@ -108,19 +121,20 @@ h1 {
    
     transition: transform .2s;
 }
-.player-turn-lbl, h3{
-    display: flex;
-    font-size: 1.5rem;
+.player-turn-display, h3{
+    font-size: 1.7rem;
+    line-height: 1.7em;
 }
 
 .player-turn-display{
     border-bottom: 2px solid black;
+    
 }
 
 
 
 
-.player-deck{
+.players{
     margin-left: 1em;
     display: flex;
     justify-content: space-between; 
@@ -131,7 +145,12 @@ h1 {
 
 .player-title {
     border: 1px solid black;
-    padding: .2em 1em;
+    padding: .1em 1em;
+    line-height: 2em;
+    font-size: 1.5rem;
+    background-color: #d6d6d6;
+    color: #000;
+    letter-spacing: .02em;
 }
 
 /* Endast för de som sitter med mindre skärmar */
@@ -161,7 +180,7 @@ body h1 {
     padding: 10px 0;
 }
 
-.player-deck{
+.players{
     display: flex;
     justify-content: space-between; 
     font-weight: bold;

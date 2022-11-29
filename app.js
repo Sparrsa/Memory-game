@@ -14,7 +14,12 @@ correctAudio.volume = 0.1;
 let wrongAudio = document.querySelector(".audio-wrong");
 wrongAudio.volume = 0.05;
 
-audio.play();
+// Music button
+let musicBtn = document
+  .querySelector(".btn-music")
+  .addEventListener("click", () => {
+    audio.play();
+  });
 
 //Generating alla bilder
 function getData() {
@@ -93,13 +98,13 @@ const cards = document.querySelectorAll(".card-container");
 
 let playerOne = {
   //Spelare 1
-  name: "player 1",
+  name: "Player 1",
   score: 0,
 };
 
 let playerTwo = {
   //Spelare 2
-  name: "player 2",
+  name: "Player 2",
   score: 0,
 };
 
@@ -196,12 +201,12 @@ function scoreCounter() {
   if (playerTurn === 0) {
     // Player 1 turn
     players[playerTurn].score = players[playerTurn].score + 1;
-    playerOneScoreLbl.innerHTML = players[playerTurn].score;
+    playerOneScoreLbl.innerHTML = " " + players[playerTurn].score;
     console.log(players[playerTurn]); // Visar räknginen i konsollen
   } else if (playerTurn === 1) {
     // Player 2 turn
     players[playerTurn].score = players[playerTurn].score + 1;
-    playerTwoScoreLbl.innerHTML = players[playerTurn].score;
+    playerTwoScoreLbl.innerHTML = " " + players[playerTurn].score;
     console.log(players[playerTurn]); // Visar räknginen i konsollen
   } else {
     console.log("no score");
