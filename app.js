@@ -10,38 +10,38 @@ let score = document.querySelector(".player-score");
 //Skapar all musik och ljudeffekter
 ///////////////////////////////////////////////
 
-//Theme song
-const audioTheme = document.createElement("audio");
-audioTheme.setAttribute("class", "theme-song");
-audioTheme.setAttribute("autoplay", "");
-audioTheme.setAttribute(
-  "src",
-  "./audio/Y2Mate.is - The Simpsons Main Title Theme-Fttst9dG6Ko-160k-1655507597330.mp3"
-);
+// //Theme song
+// const audioTheme = document.createElement("audio");
+// audioTheme.setAttribute("class", "theme-song");
+// audioTheme.setAttribute("autoplay", "");
+// audioTheme.setAttribute(
+//   "src",
+//   "./audio/Y2Mate.is - The Simpsons Main Title Theme-Fttst9dG6Ko-160k-1655507597330.mp3"
+// );
 
-//flip sfx
-const flipSfx = document.createElement("audio");
-flipSfx.setAttribute("class", "card-flip");
-flipSfx.setAttribute("src", "./audio/240776__f4ngy__card-flip.wav");
+// //flip sfx
+// const flipSfx = document.createElement("audio");
+// flipSfx.setAttribute("class", "card-flip");
+// flipSfx.setAttribute("src", "./audio/240776__f4ngy__card-flip.wav");
 
-//correct sfx
-const correctSfx = document.createElement("audio");
-correctSfx.setAttribute("class", "audio-correct");
-correctSfx.setAttribute(
-  "src",
-  "./audio/Y2Mate.is - Check mark sound effect-AbiiZErJFC4-160k-1655212547023.mp3"
-);
+// //correct sfx
+// const correctSfx = document.createElement("audio");
+// correctSfx.setAttribute("class", "audio-correct");
+// correctSfx.setAttribute(
+//   "src",
+//   "./audio/Y2Mate.is - Check mark sound effect-AbiiZErJFC4-160k-1655212547023.mp3"
+// );
 
-//wrong sfx
-const wrongSfx = document.createElement("audio");
-wrongSfx.setAttribute("class", "audio-wrong");
-wrongSfx.setAttribute(
-  "src",
-  "./audio/Y2Mate.is - Homer - D´OH-H22t-tiWiLw-128k-1659745984707.mp3"
-);
+// //wrong sfx
+// const wrongSfx = document.createElement("audio");
+// wrongSfx.setAttribute("class", "audio-wrong");
+// wrongSfx.setAttribute(
+//   "src",
+//   "./audio/Y2Mate.is - Homer - D´OH-H22t-tiWiLw-128k-1659745984707.mp3"
+// );
 
-//Lägger till allt i htmlen
-mainContainer.append(audioTheme, flipSfx, correctSfx, wrongSfx);
+// //Lägger till allt i htmlen
+// mainContainer.append(audioTheme, flipSfx, correctSfx, wrongSfx);
 
 ///////////////////////////////////////////////////
 
