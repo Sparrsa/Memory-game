@@ -14,6 +14,8 @@ correctAudio.volume = 0.1;
 let wrongAudio = document.querySelector(".audio-wrong");
 wrongAudio.volume = 0.05;
 
+audio.play();
+
 //Generating alla bilder
 function getData() {
   return [
@@ -114,7 +116,6 @@ function startGame() {
   currentPlayer = players[playerTurn];
   playerTurnLbl.innerText = currentPlayer.name;
 
-  audio.play();
   updateDisplay();
 }
 
