@@ -22,7 +22,7 @@ let musicBtn = document
     audio.play();
   });
 
-//////////////////////////////////////////////////////////////////////////////////////////////////////////////////
+/////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
 
 //Generating alla bilder
 function getData() {
@@ -99,25 +99,27 @@ cardGenerator();
 
 /////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
 
-//Spelare 1
+// Players and player turn
+
+//Player 1
 let playerOne = {
   name: "Player 1",
   score: 0,
 };
 
-//Spelare 2
+//Player 2
 let playerTwo = {
   name: "Player 2",
   score: 0,
 };
 
 let players = [playerOne, playerTwo];
-let playerTurn = 0;
+let playerTurn = 0; // Börjar med player 1
 const playerTurnLbl = document.querySelector(".player-turn-lbl");
 let currentPlayer = players[playerTurn];
 
 //Ändrar player turn
-function startGame() {
+function gameTurn() {
   playerTurn = 0; // 0 = player 1 turn, 1 = player 2 turn
   currentPlayer = players[playerTurn];
   playerTurnLbl.innerText = currentPlayer.name;
@@ -125,7 +127,7 @@ function startGame() {
   updateDisplay();
 }
 
-startGame();
+gameTurn();
 
 //Visar vems turn det är
 function updateDisplay() {
@@ -143,27 +145,27 @@ let cardLock = false;
 // 1.
 // Card flip
 function flipCard() {
-  if (cardLock) return; //Avslutar funktionen och "låser" då möjligheten att flippa fler kort om man redan valt 2st kort
-  if (this === firstCard) return;
+  if (cardLock == true) return; // cardLock är false by default. Om cardLock är "true" avslutas funktionen och "låser" då möjligheten att flippa fler kort om man redan valt 2st kort.
+
+  if (this === firstCard) return; // Gör så man inte får poäng för att klicka på samma kort två gånger
 
   this.classList.add("flip"); //Genererar en ny "flip" class till htmlen i card-container varje gång man trycker på ett kort. "this" = det man har klickat på
 
   if (!hasFlippedCard) {
-    console.log(!hasFlippedCard); //First card. "Om ett kort inte har vänts så är den false, och sedan om den vänds så blir den true"
-    //bredvid .card-container får man ett till class namn som heter ".flip"
-    hasFlippedCard = true;
-    firstCard = this;
+    console.log(hasFlippedCard); //First card. "Om ett kort inte har vänts så är den false, och sedan om den vänds så blir den true"
+    hasFlippedCard = true; // hasFlippedCards är true så vi går vidare till else statements
+    firstCard = this; // "this" = kortet vi klickat på blir firstCard
     console.log(hasFlippedCard, this);
 
     // Går vidare till else statement eftersom hasFlippedCard är true efter man vänt på ett kort
   } else {
     //second card
     hasFlippedCard = false;
-    secondCard = this;
+    secondCard = this; // "this" = kortet vi klickat på blir secondCard
     console.log(hasFlippedCard);
 
     console.log(firstCard, secondCard);
-    matchedCards(); //skickar vidare till matchedCards funktionen
+    matchedCards();
   }
   flipAudio.play();
 }
@@ -176,7 +178,7 @@ function matchedCards() {
   //Om kort ett och två matchar och har samma "data.name" så kommer addEventListener sluta gälla för dem korten. Alltså de kommer inte vändas tillbaka.
   if (firstCard.dataset.name === secondCard.dataset.name) {
     console.log(firstCard);
-    firstCard.removeEventListener("click", flipCard);
+    firstCard.removeEventListener("click", flipCard); // Slutar lyssna efter flipcard ifall korten stämmer. Alltså korten är hela tiden uppvända efteråt.
     secondCard.removeEventListener("click", flipCard);
     correctAudio.play();
     scoreCounter();
